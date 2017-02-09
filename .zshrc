@@ -54,6 +54,7 @@ ZSH_THEME="agnoster"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.aliases
 
 # User configuration
 
