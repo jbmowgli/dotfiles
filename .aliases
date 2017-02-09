@@ -1,41 +1,3 @@
-echo "The aliases are loading"
-########## Most inportant alias !!  alias wtf='curl -s $JUKEBOX_HOST/whatbeplayin | sed -e s/{//g | sed -e s/}//g | sed s/,/\\n/g | sed /image/d | sed s/\"//g'
-alias b='bundle exec'
-alias brake='noglob bundle exec rake'
-alias brails='bundle exec rails'
-alias bil='bundle install --path vendor/bundle'
-alias bib='bundle install --binstubs'
-alias bilb='bundle install --path vendor/bundle --binstubs'
-alias bilbu='bilb && bundle update --local'
-alias crake='export DISPLAY=:0;clear;brake'
-alias bcap='bundle exec cap'
-alias bundle_clean='rm -rf .bundle && rm -rf vendor/bundle && bundle install --path vendor/bundle'
-alias yolo='sudo'
-
-########### EDITORS
-alias m='mine'
-alias mine="rubymine"
-alias mvim=gvim
-alias vimsans="NO_VIMUX=true vim"
-alias rubymine="rubymine_fn"
-rubymine_fn() {
-  nohup &> /dev/null rubymine $* &
-}
-alias int="intellij"
-alias intellij="idea_fn"
-idea_fn() {
-  nohup &> /dev/null idea $* &
-}
-alias s="sublime"
-alias sublime="sublime_fn"
-sublime_fn() {
-  nohup &> /dev/null /usr/local/sublime/sublime_text $* &
-}
-
-########### ENVIRONMENTS
-# Place holder for ENVIRONMENTS
-
-
 ########### SHELL
 alias c='clear'
 alias cl='clear'
@@ -55,16 +17,3 @@ alias star_wars='telnet towel.blinkenlights.nl'
 # check if you have pry on your git diff
 alias amistupid="git diff | grep -B5 pry && echo yes you are || echo nah, you\'re cool"
 
-# for the pair-up gem
-pair() {
-  if gem list -i pair-up 2>/dev/null 1>/dev/null; then
-    command pair "$@"
-    if [[ -s "$HOME/.pair-up_export_authors" ]] ; then source "$HOME/.pair-up_export_authors" ; fi
-  else
-    echo "You do not have pair-up installed for your current ruby version."
-    echo "Please run $> gem install pair-up"
-  fi
-}
-
-# Uncomment to persist pair info between terminal instances
-pair
