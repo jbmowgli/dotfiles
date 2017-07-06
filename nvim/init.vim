@@ -11,9 +11,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'tmhedberg/matchit'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdcommenter'
-Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-endwise'
-Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'mileszs/ack.vim'
 Plug 'rking/ag.vim'
@@ -48,6 +46,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'itchyny/lightline.vim'
 Plug 'jacoborus/tender.vim'
 Plug 'KabbAmine/yowish.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'nightsense/vim-crunchbang'
+Plug 'sheerun/vim-polyglot'
 
 " ------------------------------ END PLUGIN LIST -------------------------------
 
