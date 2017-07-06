@@ -98,6 +98,7 @@ set undofile
 set undolevels=1000 "maximum number of changes that can be undone
 set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 set wrap
+set mouse=nicr
 
 let g:ack_default_options = ' -s -H --nogroup --column --type-add ruby=.feature --ignore-dir=tmp'
 let g:ackhighlight = 1
