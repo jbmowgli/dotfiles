@@ -22,10 +22,6 @@ Plug 'benmills/vimux'
   nnoremap <leader>x :autocmd! BufWritePost *<CR>
 Plug 'pgr0ss/vimux-ruby-test'
 Plug 'tpope/vim-fugitive'
-Plug 'pangloss/vim-javascript'
-  let g:javascript_ignore_javaScriptdoc = 1
-Plug 'mxw/vim-jsx'
-  let g:jsx_ext_required = 0
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
