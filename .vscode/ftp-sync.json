@@ -1,0 +1,20 @@
+{
+  "remotePath": "/home/tworker/work/ove-ruby",
+  "host": "not_hotdog.onyx.ove.com",
+  "username": "tworker",
+  "password": "thought",
+  "port": 22,
+  "secure": false,
+  "protocol": "sftp",
+  "uploadOnSave": true,
+  "passive": false,
+  "debug": false,
+  "privateKeyPath": null,
+  "passphrase": null,
+  "ignore": ["\\.vscode", "\\.git", "\\.DS_Store"],
+  "generatedFiles": {
+    "uploadOnSave": false,
+    "extensionsToInclude": [],
+    "path": ""
+  }
+}

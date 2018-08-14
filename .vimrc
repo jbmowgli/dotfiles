@@ -1,71 +1,60 @@
-set nocompatible
+set nocompatible              " be iMproved, required
+filetype on                   " required for compatibility with Mac OS X, See issue #167
+filetype off                  " required
 
-" Initialize Vundle and load plugins (plugin manager)
-" If vundle is not installed, do it first
-let should_plugin_install=0
-if !filereadable($HOME."/.vim/bundle/Vundle.vim/README.md")
-  silent !mkdir -p $HOME/.vim/bundle
-  silent !git clone https://github.com/gmarik/Vundle.vim $HOME/.vim/bundle/Vundle.vim > /dev/null 2>&1
-  let should_plugin_install=1
-endif
-filetype off " Needed to initialize Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+call plug#begin()
 
 " ----------------------------- BEGIN PLUGIN LIST ------------------------------
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tmhedberg/matchit'
-Plugin 'scrooloose/syntastic'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-endwise'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
-Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'benmills/vimux'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'tmhedberg/matchit'
+Plug 'scrooloose/syntastic'
+Plug 'flazz/vim-colorschemes'
+Plug 'scrooloose/nerdcommenter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-endwise'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
+Plug 'nightsense/vim-crunchbang'
+Plug 'ngmy/vim-rubocop'
+Plug 'tomtom/tcomment_vim'
+Plug 'benmills/vimux'
   nnoremap <leader>a :autocmd BufWritePost * :VimuxRunLastCommand<CR>
   nnoremap <leader>x :autocmd! BufWritePost *<CR>
-Plugin 'pgr0ss/vimux-ruby-test'
-Plugin 'tpope/vim-fugitive'
-Plugin 'pangloss/vim-javascript'
+Plug 'pgr0ss/vimux-ruby-test'
+Plug 'tpope/vim-fugitive'
+Plug 'pangloss/vim-javascript'
   let g:javascript_ignore_javaScriptdoc = 1
-Plugin 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx'
   let g:jsx_ext_required = 0
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'jiangmiao/auto-pairs'
   let g:AutoPairsShortcutFastWrap = '<C-W>'
-Plugin 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
   nmap <C-k> [e
   nmap <C-j> ]e
   vmap <C-k> [egv
   vmap <C-j> ]egv
   inoremap <C-j> <Esc>:m .+1<CR>==gi
   inoremap <C-k> <Esc>:m .-2<CR>==gi
-Plugin 'sukima/xmledit'
+Plug 'sukima/xmledit'
   let g:xmledit_enable_html=1
   function HtmlAttribCallback( xml_tag )
   endfunction
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 " ------------------------------ END PLUGIN LIST -------------------------------
 
 " Finish initializing Vundle plugins
-call vundle#end()
-if should_plugin_install == 1
-  :silent! PluginInstall
-  :qa
-endif
+call plug#end()
 filetype plugin indent on
 
-colorscheme desert
+colorscheme crunchbang
+set termguicolors
 
 if &term =~ '256color'
   " disable Background Color Erase (BCE) so that color schemes
@@ -73,7 +62,6 @@ if &term =~ '256color'
   " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
   set t_ut=
 endif
-
 syntax on
 
 filetype off
@@ -158,7 +146,11 @@ autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 autocmd BufNewFile,BufRead *.cap setfiletype ruby
 autocmd BufNewFile,BufRead *.ejs set filetype=html
+autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre * :%s/\s\+$//e
+
+autocmd BufWritePre *.js Neoformat
+
 
 " toggle relative number
 function! ToggleRelativeNumber()
@@ -249,6 +241,13 @@ autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
 highlight ExtraWhitespace ctermbg=red guibg=red
 map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
 
+autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote
+" Use formatprg when available
+let g:neoformat_try_formatprg = 1
+
+" format on save
+autocmd BufWritePre *.js Neoformat
+
 " highlight signs in Sy
 highlight SignifySignAdd cterm=bold ctermfg=112
 highlight SignifySignDelete cterm=bold ctermfg=1
@@ -262,6 +261,7 @@ highlight LineLengthError ctermbg=black guibg=black
 highlight Comment ctermfg=DarkMagenta
 highlight Search ctermbg=LightBlue ctermfg=Black
 highlight IncSearch ctermfg=Black
+
 
 " http://techspeak.plainlystated.com/2009/08/vim-tohtml-customization.html
 function! DivHtml(line1, line2)

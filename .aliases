@@ -9,11 +9,15 @@ alias lt='ls -ltr'
 alias nla='la -h'
 alias nll='ll -h'
 alias cls='echo -e "\ec\e[3J"'
+alias up='git up'
+alias vim='nvim'
 
 ### why not .. ?
+alias manvpn='sudo openconnect --juniper --user=jtoddy vpnb2b.manheim.com'
 alias rtfm='man'
 alias nyan='telnet nyancat.dakko.us'
 alias star_wars='telnet towel.blinkenlights.nl'
 # check if you have pry on your git diff
 alias amistupid="git diff | grep -B5 pry && echo yes you are || echo nah, you\'re cool"
+alias mywork='git show origin/release..HEAD'
 
