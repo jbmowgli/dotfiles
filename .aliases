@@ -11,6 +11,7 @@ alias nll='ll -h'
 alias cls='echo -e "\ec\e[3J"'
 alias up='git up'
 alias vim='nvim'
+alias flushNetwork="killall -HUP mDNSResponder"
 
 ### why not .. ?
 alias manvpn='sudo openconnect --juniper --user=jtoddy vpnb2b.manheim.com'
