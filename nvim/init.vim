@@ -3,6 +3,12 @@ set nocompatible
 " Initialize Vundle and load plugins (plugin manager)
 " If vundle is not installed, do it first
 call plug#begin()
+set nocompatible              " be iMproved, required
+filetype on                   " required for compatibility with Mac OS X, See issue #167
+filetype off                  " required
+
+call plug#begin()
+Plug 'gmarik/Vundle.vim'
 
 " ----------------------------- BEGIN PLUGIN LIST ------------------------------
 
@@ -15,13 +21,25 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
 Plug 'mileszs/ack.vim'
 Plug 'rking/ag.vim'
-Plug 'ngmy/vim-rubocop'
+Plug 'flazz/vim-colorschemes'
+Plug 'scrooloose/nerdcommenter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-endwise'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
+Plug 'nightsense/vim-crunchbang'
 Plug 'tomtom/tcomment_vim'
 Plug 'benmills/vimux'
   nnoremap <leader>a :autocmd BufWritePost * :VimuxRunLastCommand<CR>
   nnoremap <leader>x :autocmd! BufWritePost *<CR>
 Plug 'pgr0ss/vimux-ruby-test'
 Plug 'tpope/vim-fugitive'
+Plug 'pangloss/vim-javascript'
+  let g:javascript_ignore_javaScriptdoc = 1
+Plug 'mxw/vim-jsx'
+  let g:jsx_ext_required = 0
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
@@ -38,7 +56,6 @@ Plug 'sukima/xmledit'
   function HtmlAttribCallback( xml_tag )
   endfunction
 Plug 'ksmithbaylor/tomorrow-theme', {'rtp': 'vim/'}
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'itchyny/lightline.vim'
 Plug 'jacoborus/tender.vim'
 Plug 'KabbAmine/yowish.vim'
@@ -51,6 +68,17 @@ Plug 'sheerun/vim-polyglot'
 " Finish initializing Vundle plugins
 call plug#end()
 
+Plug 'itchyny/lightline.vim'
+Plug 'sbdchd/neoformat'
+
+" ------------------------------ END PLUGIN LIST -------------------------------
+
+" Finish initializing Plug plugins
+call plug#end()
+filetype plugin indent on
+
+colorscheme crunchbang
+set termguicolors
 
 if &term =~ '256color'
   " disable Background Color Erase (BCE) so that color schemes
@@ -237,10 +265,15 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
 
-" highlight signs in Sy
-highlight SignifySignAdd cterm=bold ctermfg=112
-highlight SignifySignDelete cterm=bold ctermfg=1
-highlight SignifySignChange cterm=bold ctermfg=39
+map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
+
+autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote
+" Use formatprg when available
+let g:neoformat_try_formatprg = 1
+
+" format on save
+autocmd BufWritePre *.js Neoformat
+
 
 " Highlight too-long lines
 autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%9126v.*/
@@ -251,6 +284,7 @@ autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
 highlight Comment ctermfg=DarkMagenta
 highlight Search ctermbg=LightBlue ctermfg=Black
 highlight IncSearch ctermfg=Black
+
 
 " http://techspeak.plainlystated.com/2009/08/vim-tohtml-customization.html
 function! DivHtml(line1, line2)
@@ -281,7 +315,6 @@ let g:ctrlp_lazy_update = 100
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_dont_split = 'NERD_tree_2'
-call deoplete#enable()
 
 function! InsertTabWrapper()
   let col = col('.') - 1
